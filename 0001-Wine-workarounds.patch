@@ -1,0 +1,44 @@
+From b4b7271fce5b8f60014ca53ed6446bb639e80e30 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Adam=20S=C5=82abo=C5=84?= <asaillen@protonmail.com>
+Date: Sat, 7 Jan 2023 19:21:58 +0100
+Subject: [PATCH] Wine workarounds
+
+---
+ configure.cmd | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/configure.cmd b/configure.cmd
+index 33213aed58d..3b9fdc14474 100755
+--- a/configure.cmd
++++ b/configure.cmd
+@@ -52,9 +52,9 @@ if defined ROS_ARCH (
+     cl 2>&1 | find "ARM" > NUL && set ARCH=arm
+     cl 2>&1 | find "ARM64" > NUL && set ARCH=arm64
+     cl 2>&1 | find "19.00." > NUL && set VS_VERSION=14
+-    cl 2>&1 | findstr /R /c:"19\.1.\." > NUL && set VS_VERSION=15
+-    cl 2>&1 | findstr /R /c:"19\.2.\." > NUL && set VS_VERSION=16
+-    cl 2>&1 | findstr /R /c:"19\.3.\." > NUL && set VS_VERSION=17
++    cl 2>&1 | find "19.1" > NUL && set VS_VERSION=15
++    cl 2>&1 | find "19.2" > NUL && set VS_VERSION=16
++    cl 2>&1 | find "19.3" > NUL && set VS_VERSION=17
+     if not defined VS_VERSION (
+         echo Error: Visual Studio version too old ^(before 14 ^(2015^)^) or version detection failed.
+         goto quit
+@@ -190,11 +190,11 @@ if EXIST CMakeCache.txt (
+ 
+ 
+ if "%BUILD_ENVIRONMENT%" == "MinGW" (
+-    cmake -G %CMAKE_GENERATOR% -DENABLE_CCACHE:BOOL=0 -DCMAKE_TOOLCHAIN_FILE:FILEPATH=%MINGW_TOOCHAIN_FILE% -DARCH:STRING=%ARCH% %BUILD_TOOLS_FLAG% %* "%REACTOS_SOURCE_DIR%"
++    cmake -G %CMAKE_GENERATOR% -DENABLE_CCACHE:BOOL=0 -DCMAKE_TOOLCHAIN_FILE:FILEPATH=%MINGW_TOOCHAIN_FILE% -DARCH:STRING=%ARCH% %BUILD_TOOLS_FLAG% %* %REACTOS_SOURCE_DIR%
+ ) else if %USE_CLANG_CL% == 1 (
+-    cmake -G %CMAKE_GENERATOR% -DCMAKE_TOOLCHAIN_FILE:FILEPATH=toolchain-msvc.cmake -DARCH:STRING=%ARCH% %BUILD_TOOLS_FLAG% -DUSE_CLANG_CL:BOOL=1 %* "%REACTOS_SOURCE_DIR%"
++    cmake -G %CMAKE_GENERATOR% -DCMAKE_TOOLCHAIN_FILE:FILEPATH=toolchain-msvc.cmake -DARCH:STRING=%ARCH% %BUILD_TOOLS_FLAG% -DUSE_CLANG_CL:BOOL=1 %* %REACTOS_SOURCE_DIR%
+ ) else (
+-    cmake -G %CMAKE_GENERATOR% %CMAKE_ARCH% -DCMAKE_TOOLCHAIN_FILE:FILEPATH=toolchain-msvc.cmake -DARCH:STRING=%ARCH% %BUILD_TOOLS_FLAG% %* "%REACTOS_SOURCE_DIR%"
++    cmake -G %CMAKE_GENERATOR% %CMAKE_ARCH% -DCMAKE_TOOLCHAIN_FILE:FILEPATH=toolchain-msvc.cmake -DARCH:STRING=%ARCH% %BUILD_TOOLS_FLAG% %* %REACTOS_SOURCE_DIR%
+ )
+ 
+ if %ERRORLEVEL% NEQ 0 (
+-- 
+2.39.0
+
