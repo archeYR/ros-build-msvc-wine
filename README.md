@@ -7,6 +7,7 @@ You can install all required dependencies using winetricks:
 `winetricks -q d3dcompiler_47 dotnet48 arial cmd`
 Now download Visual Studio installer (<a href="https://visualstudio.microsoft.com">from here</a>), run it, once it loads check "Desktop development with C++" and install.
 Visual Studio IDE won't load, but MSVC build tools should be available once you run build tools command prompt.
+
 ## Building ReactOS on Wine
 You will need to apply patch which contains workarounds for wine (it only modifies the configure.cmd script).
 
@@ -33,3 +34,6 @@ You can specify serial devices in Wine registry; in HKLM\Software\Wine\Ports add
 * Visual Studio 2022 - 17.4.4
 * WinDBGX 1.2210.3001.0
 * Wine Staging 7.22
+
+## Updating Visual Studio
+Visual Studio installer is not able to update itself in Wine. To update the installer, simply download the latest version <a href="https://visualstudio.microsoft.com">from here</a> and install it. Now the installer should download and install latest Visual Studio updates.
