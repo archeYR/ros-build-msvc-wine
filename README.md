@@ -4,7 +4,7 @@ This is about building ReactOS using MSVC compiler on Wine. While it's possible,
 
 ## Installing Visual Studio 2022
 You can install all required dependencies using winetricks:
-`winetricks -q d3dcompiler_47 dotnet48 arial cmd`
+`winetricks -q d3dcompiler_47 dotnet48 cmd`
 Now download Visual Studio installer (<a href="https://visualstudio.microsoft.com">from here</a>), run it, once it loads check "Desktop development with C++" and install.
 Visual Studio IDE won't load, but MSVC build tools should be available once you run build tools command prompt.
 
