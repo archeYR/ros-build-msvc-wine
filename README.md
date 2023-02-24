@@ -31,9 +31,9 @@ You can use both usual WinDBG from Windows SDK or WinDBGX from MS "Store" (you c
 You can specify serial devices in Wine registry; in HKLM\Software\Wine\Ports add string value named `COM[number]` which contains serial device path (eg. /dev/ttyS0).
 
 ## Used software
-* Visual Studio 2022 - 17.4.4
+* Visual Studio 2022 - 17.5.0
 * WinDBGX 1.2210.3001.0
-* Wine Staging 7.22
+* Wine Staging 8.1
 
 ## Updating Visual Studio
 Visual Studio installer is not able to update itself in Wine. To update the installer, simply download the latest version <a href="https://visualstudio.microsoft.com">from here</a> and install it. Now the installer should download and install latest Visual Studio updates.
