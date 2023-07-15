@@ -2,9 +2,13 @@
 # Build ReactOS with MSVC on Wine
 This is about building ReactOS using MSVC compiler on Wine. While it's possible, it's not very efficient and not by any means officially supported. Some of these workarounds are also need for ROSBE MinGW build if you want to use it through Wine for some reason.
 
+## Prerequisites
+You will really need to <a href="https://github.com/lutris/docs/blob/master/WineDependencies.md">install Wine dependencies</a> for this to work properly. Note that if you don't use a distribution with multilib/multiarch, Wine should use its new experimental WoW64 support (although that was not tested here).
+
 ## Installing Visual Studio 2022
 You can apply all required dependencies and tweaks using winetricks:
 `winetricks -q cmd dotnet48 renderer=vulkan win7`
+If you don't have a GPU that supports Vulkan then either install the lavapipe ICD (and also its x86 build if you're using multilib/multiarch) or otherwise invoke d3dcompiler_47 instead of renderer=vulkan in winetricks.
 Now download Visual Studio installer (<a href="https://visualstudio.microsoft.com">from here</a>), run it, once it loads check "Desktop development with C++" and install.
 Visual Studio IDE won't load, but MSVC build tools should be available once you run build tools command prompt.
 
@@ -37,6 +41,6 @@ To run WinDBGX, extract the windbg.msixbundle file, then extract windbg_win7-<yo
 You can specify serial devices in Wine registry; in HKLM\Software\Wine\Ports add string value named `COM[number]` which contains serial device path (eg. /dev/ttyS0). Shut down the Wine server (wineserver -k in terminal) to apply the serial device properties in registry.
 
 ## Used software
-* Visual Studio 2022 - 17.6.3
+* Visual Studio 2022 - 17.6.5
 * WinDBGX 1.2306.12001.0
-* Wine Staging 8.10
+* Wine Staging 8.12
