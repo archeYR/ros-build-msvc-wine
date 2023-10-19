@@ -5,13 +5,13 @@ This is about building ReactOS using MSVC compiler on Wine. While it's possible,
 ## Prerequisites
 You will really need to <a href="https://github.com/lutris/docs/blob/master/WineDependencies.md">install Wine dependencies</a> for this to work properly. Note that if you don't use a distribution with multilib/multiarch, Wine should use its new experimental WoW64 support (although that was not tested here).
 
-## Installing Visual Studio 2022
+## Installing Visual Studio 2019
 You can apply all required dependencies and tweaks using winetricks:
 `winetricks -q cmd dotnet48 renderer=vulkan win7`
 
 If you don't have a GPU that supports Vulkan then either install the lavapipe ICD (and also its x86 build if you're using multilib/multiarch) or otherwise invoke `d3dcompiler_47` instead of `renderer=vulkan` in winetricks.
 
-Now download Visual Studio installer (<a href="https://visualstudio.microsoft.com">from here</a>), run it, once it loads check "Desktop development with C++" and install.
+Now download Visual Studio installer and run it, once it loads check "Desktop development with C++" and install.
 
 Visual Studio IDE won't load, but MSVC build tools should be available once you run build tools command prompt.
 
@@ -19,7 +19,7 @@ Visual Studio IDE won't load, but MSVC build tools should be available once you 
 You will need to apply patch which contains workarounds for wine (it only modifies the configure.cmd script).
 
 1. Apply `0001-Wine-workarounds.patch` on ReactOS git repo
-2. Run `C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsamd64_x86.bat` (vcvars64.bat for amd64 build target arch)
+2. Run `C:\Program Files\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsamd64_x86.bat` (vcvars64.bat for amd64 build target arch)
 3. CD to reactos repo folder
 4. Set necessary environment variables (if you build with ROSBE, you also need replace bison/flex/m4 with those from build-tools)
    * `set PATH=%PATH%;path\to\build-tools\bin`
@@ -37,7 +37,7 @@ You will need to apply patch which contains workarounds for wine (it only modifi
 ## WinDBG on Wine
 To run WinDBG on Wine:
 
-0. If you are looking just for WinDBG on Wine (without installing VS2022 beforehand, otherwise skip this step)
+0. If you are looking just for WinDBG on Wine (without installing VS2019 beforehand, otherwise skip this step)
    * `winetricks -q dotnet48 renderer=vulkan`
    * Or if you don't have a Vulkan ICD: `winetricks -q dotnet48 d3dcompiler_47`
 1. Run `winetricks -q xmllite` (probably needed only for WinDBGX)
@@ -51,6 +51,6 @@ To run WinDBGX, extract the `windbg.msixbundle` file, then extract `windbg_win7-
 You can specify serial devices in Wine registry; in `HKLM\Software\Wine\Ports` add string value named `COM[number]` which contains serial device path (eg. `/dev/ttyS0`). Shut down the Wine server (`wineserver -k` in terminal) to apply the serial device properties in registry.
 
 ## Used software
-* Visual Studio 2022 - 17.6.5
+* Visual Studio 2019 - 16.11.29
 * WinDBGX 1.2306.12001.0
-* Wine Staging 8.12
+* Wine Staging 8.18
