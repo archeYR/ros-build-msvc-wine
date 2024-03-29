@@ -1,30 +1,32 @@
-From 8932607b77e0708d2805b25d66f3c3736c30a9dd Mon Sep 17 00:00:00 2001
+From b4f51cb35f7b15e5296ecfecee70050b738af094 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Adam=20S=C5=82abo=C5=84?= <asaillen@protonmail.com>
-Date: Tue, 31 Oct 2023 16:19:20 +0100
+Date: Fri, 29 Mar 2024 15:35:38 +0100
 Subject: [PATCH] Wine workarounds
 
 ---
- configure.cmd | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+ configure.cmd | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
 diff --git a/configure.cmd b/configure.cmd
-index 32f776a90e0..5e05688dce1 100755
+index d94501ab4bc..5e85115a1d8 100755
 --- a/configure.cmd
 +++ b/configure.cmd
-@@ -52,9 +52,9 @@ if defined ROS_ARCH (
+@@ -52,10 +52,10 @@ if defined ROS_ARCH (
      cl 2>&1 | find "ARM" > NUL && set ARCH=arm
      cl 2>&1 | find "ARM64" > NUL && set ARCH=arm64
      cl 2>&1 | find "19.00." > NUL && set VS_VERSION=14
 -    cl 2>&1 | findstr /R /c:"19\.1.\." > NUL && set VS_VERSION=15
 -    cl 2>&1 | findstr /R /c:"19\.2.\." > NUL && set VS_VERSION=16
 -    cl 2>&1 | findstr /R /c:"19\.3.\." > NUL && set VS_VERSION=17
+-    cl 2>&1 | findstr /R /c:"19\.4.\." > NUL && set VS_VERSION=17
 +    cl 2>&1 | find "19.1" > NUL && set VS_VERSION=15
 +    cl 2>&1 | find "19.2" > NUL && set VS_VERSION=16
 +    cl 2>&1 | find "19.3" > NUL && set VS_VERSION=17
++    cl 2>&1 | find "19.4" > NUL && set VS_VERSION=17
      if not defined VS_VERSION (
          echo Error: Visual Studio version too old ^(before 14 ^(2015^)^) or version detection failed.
          goto quit
-@@ -196,11 +196,11 @@ if EXIST CMakeCache.txt (
+@@ -197,11 +197,11 @@ if EXIST CMakeCache.txt (
  
  
  if "%BUILD_ENVIRONMENT%" == "MinGW" (
@@ -40,5 +42,5 @@ index 32f776a90e0..5e05688dce1 100755
  
  if %ERRORLEVEL% NEQ 0 (
 -- 
-2.42.0
+2.44.0
 
