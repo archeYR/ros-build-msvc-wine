@@ -43,14 +43,14 @@ To run WinDBG on Wine:
 1. Run `winetricks -q xmllite` (probably needed only for WinDBGX)
 2. add DLL overrides (Native then Builtin) for `dbghelp` and `dbgeng` in winecfg.
 
-You can use both usual WinDBG from Windows SDK or the new WinDBGX.
+While both classic WinDBG from Windows SDK and the new WinDBG run on Wine, the latter seems to work much better and is much more usable.
 
-You can download WinDBGX <a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/">from here</a>. The download link is an Uri value under MainBundle section in `windbg.appinstaller` file.
-To run WinDBGX, extract the `windbg.msixbundle` file, then extract `windbg_win7-<your_host_architecture>.msix` and run `DbgX.Shell.exe` binary.
+You can download new WinDBG <a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/">from here</a>. The download link is an Uri value under MainBundle section in `windbg.appinstaller` file.
+To run new WinDBG, extract the `windbg.msixbundle` file, then extract `windbg_win7-<your_host_architecture>.msix` and run `DbgX.Shell.exe` binary.
 
 You can specify serial devices in Wine registry; in `HKLM\Software\Wine\Ports` add string value named `COM[number]` which contains serial device path (eg. `/dev/ttyS0`). Shut down the Wine server (`wineserver -k` in terminal) to apply the serial device properties in registry.
 
 ## Used software
 * Visual Studio 2019 - 16.11.29
-* WinDBGX 1.2306.12001.0
+* WinDBG 1.2306.12001.0
 * Wine Staging 8.18
