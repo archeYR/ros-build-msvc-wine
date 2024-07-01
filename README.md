@@ -3,11 +3,11 @@
 This is about building ReactOS using MSVC compiler on Wine. While it's possible, it's not very efficient and not by any means officially supported. Some of these workarounds are also need for ROSBE MinGW build if you want to use it through Wine for some reason.
 
 ## Prerequisites
-You will really need to <a href="https://github.com/lutris/docs/blob/master/WineDependencies.md">install Wine dependencies</a> for this to work properly. Note that if you don't use a distribution with multilib/multiarch, Wine should use its new experimental WoW64 support (although that was not tested here).
+You will really need to <a href="https://github.com/lutris/docs/blob/master/WineDependencies.md">install Wine dependencies</a> for this to work properly. Note that if you don't use a distribution with multilib/multiarch, Wine should use its new experimental WoW64 support.
 
 ## Installing Visual Studio 2019
 You can apply all required dependencies and tweaks using winetricks:
-`winetricks -q cmd dotnet48 renderer=vulkan win7`
+`winetricks -q dotnet48 ucrtbase2019 renderer=vulkan win7`
 
 If you don't have a GPU that supports Vulkan then either install the lavapipe ICD (and also its x86 build if you're using multilib/multiarch) or otherwise invoke `d3dcompiler_47` instead of `renderer=vulkan` in winetricks.
 
@@ -40,7 +40,7 @@ To run WinDBG on Wine:
 0. If you are looking just for WinDBG on Wine (without installing VS2019 beforehand, otherwise skip this step)
    * `winetricks -q dotnet48 renderer=vulkan`
    * Or if you don't have a Vulkan ICD: `winetricks -q dotnet48 d3dcompiler_47`
-1. Run `winetricks -q xmllite` (probably needed only for WinDBGX)
+1. Run `winetricks -q xmllite` (probably needed only for the new WinDBG)
 2. add DLL overrides (Native then Builtin) for `dbghelp` and `dbgeng` in winecfg.
 
 While both classic WinDBG from Windows SDK and the new WinDBG run on Wine, the latter seems to work much better and is much more usable.
@@ -52,5 +52,5 @@ You can specify serial devices in Wine registry; in `HKLM\Software\Wine\Ports` a
 
 ## Used software
 * Visual Studio 2019 - 16.11.29
-* WinDBG 1.2306.12001.0
-* Wine Staging 8.18
+* WinDBG 1.2402.24001.0
+* Wine Staging 9.12
