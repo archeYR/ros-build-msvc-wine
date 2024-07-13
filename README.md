@@ -40,7 +40,7 @@ To run WinDBG on Wine:
 0. If you are looking just for WinDBG on Wine (without installing VS2019 beforehand, otherwise skip this step)
    * `winetricks -q dotnet48 renderer=vulkan`
    * Or if you don't have a Vulkan ICD: `winetricks -q dotnet48 d3dcompiler_47`
-1. Run `winetricks -q xmllite` (probably needed only for the new WinDBG)
+1. Run `winetricks -q xmllite corefonts` (probably needed only for the new WinDBG)
 2. add DLL overrides (Native then Builtin) for `dbghelp` and `dbgeng` in winecfg.
 
 While both classic WinDBG from Windows SDK and the new WinDBG run on Wine, the latter seems to work much better and is much more usable.
