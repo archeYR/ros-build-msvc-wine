@@ -7,7 +7,7 @@ You will really need to <a href="https://github.com/lutris/docs/blob/master/Wine
 
 ## Installing Visual Studio 2019
 You can apply all required dependencies and tweaks using winetricks:
-`winetricks -q dotnet48 ucrtbase2019 renderer=vulkan win7`
+`winetricks -q dotnet48 renderer=vulkan win7`
 
 If you don't have a GPU that supports Vulkan then either install the lavapipe ICD (and also its x86 build if you're using multilib/multiarch) or otherwise invoke `d3dcompiler_47` instead of `renderer=vulkan` in winetricks.
 
@@ -53,4 +53,4 @@ You can specify serial devices in Wine registry; in `HKLM\Software\Wine\Ports` a
 ## Used software
 * Visual Studio 2019 - 16.11.29
 * WinDBG 1.2402.24001.0
-* Wine Staging 9.12
+* Wine Staging 9.13
