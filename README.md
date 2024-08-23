@@ -34,6 +34,12 @@ You will need to apply patch which contains workarounds for wine (it only modifi
 * Visual Studio installer might break (returning "The install operation failed" message) if Wine Windows version is set to Windows 10. Set the Windows version to Windows 7 (via winecfg or winetricks win7).
 * Visual Studio installer is not able to update itself in Wine. To update the installer, simply download the latest version <a href="https://visualstudio.microsoft.com">from here</a> and install it. Now the installer should download and install latest Visual Studio updates.
 
+## Visual Studio 2022
+Due to restricted availbility of older Visual Studio versions (thanks MS), you may want to use Visual Studio 2022 instead, however that currently requires the patched Wine build.
+* Apply <a href="https://gitlab.winehq.org/wine/wine/-/merge_requests/6288">this patch</a> and build Wine.
+* Extract `VisualStudioSetup.exe` and run `vs_setup_bootstrapper.exe`.
+* Proceed as with VS2019 setup, with the exception of dropping `win7` from the `winetricks` command.
+
 ## WinDBG on Wine
 To run WinDBG on Wine:
 
@@ -50,7 +56,17 @@ To run new WinDBG, extract the `windbg.msixbundle` file, then extract `windbg_wi
 
 You can specify serial devices in Wine registry; in `HKLM\Software\Wine\Ports` add string value named `COM[number]` which contains serial device path (eg. `/dev/ttyS0`). Shut down the Wine server (`wineserver -k` in terminal) to apply the serial device properties in registry.
 
+In order to debug a VM guest, you can pipe the VM Unix socket to Wine via `socat`.
+* Set the serial device path in Wine registry to a PTY that socat will create (eg. /tmp/wine-port) and run `wineserver -k`.
+* Set the Unix socket path in VM (eg. /tmp/socket) and start the VM.
+* Run `socat UNIX-CONNECT:/tmp/socket PTY,link=/tmp/wine-port`
+
+Now you should be able to attach WinDBG to the VM.
+
+If new WinDBG crashes when breaking into debugger, it could be due to host system setting LANG environment variable to some region specific value that is not handled by WinDBG (like en-DK), try setting `LANG=en-US`.
+
 ## Used software
 * Visual Studio 2019 - 16.11.29
-* WinDBG 1.2402.24001.0
-* Wine Staging 9.13
+* Visual Studio 2022 - 17.11.1
+* WinDBG 1.2407.24003.0
+* Wine Staging 9.15
