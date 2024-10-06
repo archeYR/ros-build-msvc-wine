@@ -11,21 +11,19 @@ You can apply all required dependencies and tweaks using winetricks:
 
 If you don't have a GPU that supports Vulkan then either install the lavapipe ICD (and also its x86 build if you're using multilib/multiarch) or otherwise invoke `d3dcompiler_47` instead of `renderer=vulkan` in winetricks.
 
-Now download Visual Studio installer and run it, once it loads check "Desktop development with C++" and install.
+Now download Visual Studio installer, extract `VisualStudioSetup.exe` and run `vs_setup_bootstrapper.exe`, once it loads check "Desktop development with C++" and install.
 
 Visual Studio IDE won't load, but MSVC build tools should be available once you run build tools command prompt.
 
 ## Building ReactOS on Wine
-You will need to apply patch which contains workarounds for wine (it only modifies the configure.cmd script).
 
-1. Apply `0001-Wine-workarounds.patch` on ReactOS git repo
-2. Run `C:\Program Files\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsamd64_x86.bat` (vcvars64.bat for amd64 build target arch)
-3. CD to reactos repo folder
-4. Set necessary environment variables (if you build with ROSBE, you also need replace bison/flex/m4 with those from build-tools)
+1. Run `C:\Program Files\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsamd64_x86.bat` (vcvars64.bat for amd64 build target arch)
+2. CD to reactos repo folder
+3. Set necessary environment variables (if you build with ROSBE, you also need replace bison/flex/m4 with those from build-tools)
    * `set PATH=%PATH%;path\to\build-tools\bin`
    * `set BISON_PKGDATADIR=path\to\build-tools\share\bison`
    * `set M4=path\to\build-tools\bin\m4.exe`
-5. run configure.cmd and proceed as usually
+4. run configure.cmd and proceed as usually
 
 ## Known issues
 * Build takes much more time than on Windows
@@ -37,7 +35,6 @@ You will need to apply patch which contains workarounds for wine (it only modifi
 ## Visual Studio 2022
 Due to restricted availbility of older Visual Studio versions (thanks MS), you may want to use Visual Studio 2022 instead, however that currently requires the patched Wine build.
 * Apply <a href="https://gitlab.winehq.org/wine/wine/-/merge_requests/6288">this patch</a> and build Wine.
-* Extract `VisualStudioSetup.exe` and run `vs_setup_bootstrapper.exe`.
 * Proceed as with VS2019 setup, with the exception of dropping `win7` from the `winetricks` command.
 
 ## WinDBG on Wine
@@ -65,8 +62,10 @@ Now you should be able to attach WinDBG to the VM.
 
 If new WinDBG crashes when breaking into debugger, it could be due to host system setting LANG environment variable to some region specific value that is not handled by WinDBG (like en-DK), try setting `LANG=en-US`.
 
+Note that kdusb and kd1394 are not going to work as WinDBG depends on additional Windows kernel drivers on the debugger machine for these.
+
 ## Used software
-* Visual Studio 2019 - 16.11.29
-* Visual Studio 2022 - 17.11.1
-* WinDBG 1.2407.24003.0
-* Wine Staging 9.15
+* Visual Studio 2019 - 16.11.40
+* Visual Studio 2022 - 17.11.4
+* WinDBG 1.2409.17001.0
+* Wine Staging 9.19
