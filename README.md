@@ -11,7 +11,7 @@ You can apply all required dependencies and tweaks using winetricks:
 
 If you don't have a GPU that supports Vulkan then either install the lavapipe ICD (and also its x86 build if you're using multilib/multiarch) or otherwise invoke `d3dcompiler_47` instead of `renderer=vulkan` in winetricks.
 
-Now download Visual Studio installer, extract `VisualStudioSetup.exe` and run `vs_setup_bootstrapper.exe`, once it loads check "Desktop development with C++" and install.
+Now download Visual Studio installer and run it, once it loads check "Desktop development with C++" and install.
 
 Visual Studio IDE won't load, but MSVC build tools should be available once you run build tools command prompt.
 
@@ -66,6 +66,6 @@ Note that kdusb and kd1394 are not going to work as WinDBG depends on additional
 
 ## Used software
 * Visual Studio 2019 - 16.11.40
-* Visual Studio 2022 - 17.11.4
-* WinDBG 1.2409.17001.0
-* Wine Staging 9.19
+* Visual Studio 2022 - 17.12.4
+* WinDBG 1.2410.11001.0
+* Wine Staging 10.0
