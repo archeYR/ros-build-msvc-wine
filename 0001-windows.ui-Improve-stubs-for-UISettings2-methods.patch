@@ -1,0 +1,42 @@
+From 6afea7dd363fc485edd6771de195a931ef258412 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Adam=20S=C5=82abo=C5=84?= <asaillen@protonmail.com>
+Date: Thu, 27 Mar 2025 14:39:42 +0100
+Subject: [PATCH] windows.ui: Improve stubs for UISettings2 methods.
+
+---
+ dlls/windows.ui/uisettings.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/dlls/windows.ui/uisettings.c b/dlls/windows.ui/uisettings.c
+index 8ae4c912721..b9dd6cc2173 100644
+--- a/dlls/windows.ui/uisettings.c
++++ b/dlls/windows.ui/uisettings.c
+@@ -219,20 +219,22 @@ DEFINE_IINSPECTABLE( uisettings2, IUISettings2, struct uisettings, IUISettings_i
+ static HRESULT WINAPI uisettings2_get_TextScaleFactor( IUISettings2 *iface, DOUBLE *value )
+ {
+     FIXME( "iface %p, value %p stub!\n", iface, value );
+-    return E_NOTIMPL;
++    *value = 1;
++    return S_OK;
+ }
+ 
+ static HRESULT WINAPI uisettings2_add_TextScaleFactorChanged( IUISettings2 *iface, ITypedEventHandler_UISettings_IInspectable *handler,
+         EventRegistrationToken *cookie )
+ {
+     FIXME( "iface %p, handler %p, cookie %p stub!\n", iface, handler, cookie );
+-    return E_NOTIMPL;
++    *cookie = dummy_cookie;
++    return S_OK;
+ }
+ 
+ static HRESULT WINAPI uisettings2_remove_TextScaleFactorChanged( IUISettings2 *iface, EventRegistrationToken cookie )
+ {
+     FIXME( "iface %p, cookie %#I64x stub!\n", iface, cookie.value );
+-    return E_NOTIMPL;
++    return S_OK;
+ }
+ 
+ static const struct IUISettings2Vtbl uisettings2_vtbl =
+-- 
+2.49.0
+

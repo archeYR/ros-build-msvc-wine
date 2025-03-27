@@ -48,6 +48,8 @@ To run WinDBG on Wine:
 
 While both classic WinDBG from Windows SDK and the new WinDBG run on Wine, the latter seems to work much better and is much more usable.
 
+In newer WinDBG versions (first noticed in 1.2502.25002.0), there was some user interface update and now WinDBG crashes trying to call the unimplemented TextScaleFactor methods. In order to get the latest version working, you have to apply the patch for UISettings2 stubs in Wine source and rebuild. Alternatively you can use <a href="https://windbg.download.prss.microsoft.com/dbazure/prod/1-2410-11001-0/windbg.msixbundle">the last version that was known to work</a>.
+
 You can download new WinDBG <a href="https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/">from here</a>. The download link is an Uri value under MainBundle section in `windbg.appinstaller` file.
 To run new WinDBG, extract the `windbg.msixbundle` file, then extract `windbg_win7-<your_host_architecture>.msix` and run `DbgX.Shell.exe` binary.
 
@@ -64,8 +66,7 @@ If new WinDBG crashes when breaking into debugger, it could be due to host syste
 
 Note that kdusb and kd1394 are not going to work as WinDBG depends on additional Windows kernel drivers on the debugger machine for these.
 
-## Used software
-* Visual Studio 2019 - 16.11.40
-* Visual Studio 2022 - 17.12.4
-* WinDBG 1.2410.11001.0
-* Wine Staging 10.0
+## Tested software
+* Visual Studio 2022 - 17.13.5
+* WinDBG 1.2502.25002.0
+* Wine Staging 10.4
